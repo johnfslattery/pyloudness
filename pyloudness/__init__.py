@@ -4,7 +4,7 @@ import os
 
 def get_loudness(file_location):
     command = ['ffmpeg', '-nostats', '-i', file_location,  '-filter_complex', 'ebur128=peak=true', '-f', 'null', '-']
-    output = subprocess.check_output(command, stderr=subprocess.STDOUT, universal_newlines=True)
+    output = subprocess.check_output(command, stderr=subprocess.STDOUT, universal_newlines=True, encoding='utf8')
     summary = output.split("Summary:")[-1]
     output = None
     integrated_loudness = summary.split("Integrated loudness:",1)[1].split("Loudness range:",1)[0]
